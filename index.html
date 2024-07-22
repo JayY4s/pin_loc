@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PinLoc</title>
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+            crossorigin="anonymous">
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet"
+            href="https://unpkg.com/leaflet/dist/leaflet.css">
+        <!-- Bootstrap Icons CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+            rel="stylesheet">
+        <!-- Leaflet Fullscreen CSS -->
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="style.css">
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="images/icon.png">
+    </head>
+    <body class="container-fluid">
+
+        <!-- diseable interaction -->
+        <div id="overlay"></div>
+
+        <header>
+            <div class="header-content">
+                <div class="row align-items-center menu">
+                    <div
+                        class="col-md-6 col-12 mb-3 d-flex flex-column flex-md-row align-items-md-center">
+                        <!-- label and input for coordinates -->
+                        <div class="form-group w-100 me-md-3 mb-2 mb-md-0">
+                            <label for="coordinates"
+                                class="form-label mb-0">Coordinates:</label>
+                            <input type="text" id="coordinates"
+                                class="form-control"
+                                placeholder="Ex: 35.046928,-40.970640">
+                        </div>
+                        <!-- update coordinates button -->
+                        <div class="mt-auto d-flex flex-column flex-md-row">
+                            <button
+                                class="btn btn-primary me-md-4 mb-2 mb-md-0 update"
+                                onclick="updateCoordinates()">Update</button>
+                            <button class="btn btn-warning mt-2 mt-md-0 reset"
+                                onclick="reset()">Reset</button>
+                        </div>
+                    </div>
+                    <div
+                        class="col-md-6 col-12 mb-3 d-flex flex-column flex-md-row align-items-md-center">
+                        <!-- label and input for latitude -->
+                        <div class="form-group w-100 me-md-3 mb-2 mb-md-0">
+                            <label for="latitude"
+                                class="form-label mb-0">Latitude:</label>
+                            <input type="text" id="latitude"
+                                class="form-control"
+                                placeholder="Ex: 35.046928">
+                        </div>
+                        <!-- label and input for longitude -->
+                        <div class="form-group w-100 me-md-3 mb-2 mb-md-0">
+                            <label for="longitude"
+                                class="form-label mb-0">Longitude:</label>
+                            <input type="text" id="longitude"
+                                class="form-control"
+                                placeholder="Ex: -40.970640">
+                        </div>
+                        <!-- update lat lon button -->
+                        <button class="btn btn-primary mt-auto update"
+                            onclick="updateLatLon()">Update</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- toggle menu button -->
+            <div class="row text-center toggle">
+                <button class="toggle-button btn"
+                    onclick="toggleHeaderContent()">
+                    <span id="toggle-icon" class="bi bi-arrow-up-circle"></span>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <!-- display map -->
+            <div id="map"></div>
+
+            <!-- setting button -->
+            <div class="row text-center justify-content-end">
+                <button class="btn btn-primary" id="setting-button"
+                    onclick="showSetting()">
+                    <i class="bi bi-gear"></i>
+                </button>
+            </div>
+
+            <!-- setting window -->
+            <div class="setting-window" id="setting-window" tabindex="-1">
+
+                <div class="text-center" id="setting-title">
+                    Settings
+                </div>
+
+                <div class="row marker-setting">
+                    <!-- Select List Column -->
+                    <div
+                        class="col-md-6 text-center align-items-center select-list">
+                        <label for="markerSelect" class="form-label">Select
+                            Marker:</label>
+                        <select id="markerSelect" class="form-select"
+                            onchange="changeMarker()">
+                            <option value="0">Blue pin (default)</option>
+                            <option value="1">Green leaf</option>
+                            <option value="2">Red leaf</option>
+                            <option value="3">Orange leaf</option>
+                            <option value="4">Black pin</option>
+                            <option value="5">Brazil</option>
+                        </select>
+                    </div>
+
+                    <!-- Image Preview Column -->
+                    <div class="col-md-6 text-center align-items-center">
+                        <label class="form-label"
+                            for="selectedMarkerImage">Select Marker
+                            Image:</label>
+                        <img class="img-fluid image" id="selectedMarkerImage"
+                            alt="Selected Marker">
+                    </div>
+                </div>
+
+                <!-- Button at Bottom Right Corner -->
+                <div class="row mt-3">
+                    <div class="col text-end">
+                        <button class="btn btn-primary" id="close-setting"
+                            onclick="hideSetting()">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Modal -->
+            <div class="modal fade" id="alertBox" tabindex="-1"
+                aria-labelledby="alertModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title" id="alertModalLabel">Error
+                                <i
+                                    class="bi bi-emoji-expressionless-fill"></i></h5>
+                        </div>
+                        <div class="modal-body" id="alertMessage">
+                        </div>
+                        <div class="modal-footer border-0">
+                            <button type="button" class="btn btn-secondary"
+                                data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+
+        </footer>
+
+        <!-- Bootstrap JS Bundle (with Popper.js) -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <!-- Leaflet Fullscreen Plugin -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.6.0/Control.FullScreen.min.js"></script>
+        <!-- jQuery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <!-- Custom JavaScript -->
+        <script src="script.js"></script>
+    </body>
+</html>

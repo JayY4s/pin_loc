@@ -101,6 +101,19 @@ document.addEventListener("DOMContentLoaded", function () {
                     shadowAnchor: [15, 55]
                 });
                 break;
+            case '6':
+                markerUrl = 'images/penguin.png';
+                shadowUrl = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png';
+                customIcon = L.icon({
+                    iconUrl: markerUrl,
+                    shadowUrl: shadowUrl,
+                    iconSize: [45, 45],
+                    iconAnchor: [20, 45],
+                    popupAnchor: [0, -45],
+                    shadowSize: [45, 45],
+                    shadowAnchor: [10, 50]
+                });
+                break;
             default:
                 markerUrl = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png';
                 shadowUrl = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png';

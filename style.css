@@ -1,4 +1,8 @@
 /* main page */
+.box{
+ border: 1px solid black;
+}
+
 body {
     overflow: hidden;
     margin: 0;
@@ -8,6 +12,8 @@ body {
 .menu {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1%;
+    color: white;
+    max-height: none;
 }
 
 .label {
@@ -41,10 +47,15 @@ input:focus {
 
 #map {
     position: absolute;
+    top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     z-index: -5;
+}
+
+#toggle-icon{
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .toggle {
@@ -85,22 +96,26 @@ input:focus {
     display: none;
 }
 
-/* setting button */
-#setting-button {
-    display: flex;
-    justify-content: flex-end;
+
+/* Style for the setting button */
+.setting{
+    position: absolute;
+    bottom: 0;
+    left: 50px;
+    margin: 10px;
 }
 
 #setting-button {
+    display: flex;
     border-radius: 50%;
     width: 40px; 
     height: 40px; 
-    display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     border: transparent;
+    color: white;
 }
 
 #setting-button:hover{
@@ -161,9 +176,15 @@ input:focus {
     overflow: hidden;
 }
 
+.marker-image{
+    min-height: 135px;
+}
+
 .image{
     max-width: 100px;
+    min-width: 40px;
     max-height: 100px;
+    min-height: 40px;
     display: block;
     margin: auto;
 }
@@ -174,4 +195,113 @@ input:focus {
 
 #markerSelect{
     background-color: rgba(219, 219,219, 1);
+}
+
+/* help button */
+.help{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 10px;
+}
+
+#help-button{
+    display: flex;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: transparent;
+    color: white;
+}
+
+#help-button:hover{
+    border: solid 1px rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* help window */
+.help-window{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 60%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: rgba(128, 128, 128, 1);
+    border: 1px solid black;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    z-index: 1000;
+}
+
+.help-window.show{
+    display: block;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.help-text{
+    text-align: left;
+    margin: 0 50px 0 50px;
+}
+
+.help-scroll{
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+/* place marker button */
+.place-marker{
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+    margin: 10px;
+}
+
+#place-marker-button{
+    display: flex;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: transparent;
+    color: white;
+}
+
+#place-marker-button:hover{
+    border: solid 1px rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* message */
+#message{
+    text-align: center;
+
+}
+
+/* media */
+@media (max-width: 768px){
+    .menu{
+        max-height: 250px;
+        overflow-y: auto;
+    }
 }

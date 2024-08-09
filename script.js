@@ -246,22 +246,22 @@ $(document).ready(function () {
         toggleIcon.classList.toggle('bi-arrow-up-circle');
     };
 
-    function showSetting() {
+    window.showSetting = function() {
         $('#setting-window').show();
         $('#overlay').show();
     }
 
-    function hideSetting() {
+    window.hideSetting = function() {
         $('#setting-window').hide();
         $('#overlay').hide();
     }
 
-    function showHelp() {
+    window.showHelp = function() {
         $('#help-window').show();
         $('#overlay').show();
     }
 
-    function hideHelp() {
+    window.hideHelp = function() {
         $('#help-window').hide();
         $('#overlay').hide();
     }

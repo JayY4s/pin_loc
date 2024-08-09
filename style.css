@@ -109,7 +109,7 @@ input:focus {
 }
 
 /* Style for the setting button */
-.setting{
+.setting-button-container{
     position: absolute;
     bottom: 0;
     left: 50px;
@@ -134,13 +134,13 @@ input:focus {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* window setting */
-.setting-window {
+/* setting and help window*/
+.setting-window, .help-window {
     display: none;
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 80%;
+    width: 60%;
     height: 60%;
     transform: translate(-50%, -50%);
     padding: 20px;
@@ -151,22 +151,22 @@ input:focus {
     z-index: 1000;
 }
 
-.setting-window.show{
+.setting-window.show, .help-window.show{
     display: block;
 }
 
-.setting-scroll{
+.setting-scroll, .help-scroll{
     overflow-y: auto;
     overflow-x: hidden;
     max-height: 75%;
 }
 
-#setting-title{
+#setting-title, #help-title{
     font-size: 20px;
     margin-bottom: 10px;
 }
 
-#close-setting{
+#close-setting, #close-help{
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -175,7 +175,7 @@ input:focus {
     border: transparent;
 }
 
-#close-setting:hover{
+#close-setting:hover, #close-help:hover{
     background-color: rgba(255, 0, 0, 1);
     outline: rgba(29, 11, 190, 0.5);
     box-shadow: 0 0 5px
@@ -203,7 +203,7 @@ input:focus {
 }
 
 /* help button */
-.help{
+.help-button-container{
     position: absolute;
     bottom: 0;
     left: 0;
@@ -229,33 +229,6 @@ input:focus {
 }
 
 /* help window */
-.help-window{
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 80%;
-    height: 60%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: rgba(128, 128, 128, 1);
-    border: 1px solid black;
-    border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
-    z-index: 1000;
-}
-
-.help-window.show{
-    display: block;
-}
-
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding-bottom: 10px;
-}
 
 .help-text{
     text-align: left;
@@ -270,10 +243,6 @@ input:focus {
     margin-bottom: 10px;
 }
 
-.help-scroll{
-    max-height: 75%;
-    overflow-y: auto;
-}
 
 /* place marker button */
 .place-marker{
@@ -313,10 +282,17 @@ input:focus {
         max-height: 250px;
         overflow-y: auto;
     }
+
     .help-window{
         padding: 2px;
+        width: 80%;
     }
+
     .help-scroll{
         max-height: 73%;
+    }
+
+    .setting-window{
+        width: 80%;
     }
 }

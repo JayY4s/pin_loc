@@ -33,15 +33,15 @@
         <header>
             <div class="header-content">
                 <div class="row align-items-center menu">
-                    <div
-                        class="col-md-6 col-12 mb-3 d-flex flex-column flex-md-row align-items-md-center">
+                    <div class="col-md-6 col-12 mb-3 d-none d-md-flex flex-column flex-md-row align-items-md-center coordinate-section">
                         <!-- label and input for coordinates -->
                         <div class="form-group w-100 me-md-3 mb-2 mb-md-0">
                             <label for="coordinates"
                                 class="form-label mb-0">Coordinates:</label>
                             <input type="text" id="coordinates"
                                 class="form-control"
-                                placeholder="Ex: 35.046928,-40.970640">
+                                placeholder="Ex: 35.046928,-40.970640"
+                                maxlength="20">
                         </div>
                         <!-- update coordinates button -->
                         <div class="mt-auto d-flex flex-column flex-md-row">
@@ -60,7 +60,8 @@
                                 class="form-label mb-0">Latitude:</label>
                             <input type="text" id="latitude"
                                 class="form-control"
-                                placeholder="Ex: 35.046928">
+                                placeholder="Ex: 35.046928"
+                                maxlength="9">
                         </div>
                         <!-- label and input for longitude -->
                         <div class="form-group w-100 me-md-3 mb-2 mb-md-0">
@@ -68,11 +69,15 @@
                                 class="form-label mb-0">Longitude:</label>
                             <input type="text" id="longitude"
                                 class="form-control"
-                                placeholder="Ex: -40.970640">
+                                placeholder="Ex: -40.970640"
+                                maxlength="9">
                         </div>
                         <!-- update lat lon button -->
                         <button class="btn btn-primary mt-auto update"
                             onclick="updateLatLon()">Update</button>
+                        <!-- reset button on smaller screen -->
+                        <button class="btn btn-warning mt-2 mt-md-0 d-md-none reset"
+                            onclick="resetMarker()">Reset</button>
                     </div>
                 </div>
             </div>
@@ -102,15 +107,21 @@
 
             <!-- setting button -->
             <div class="setting-button-container">
-                <button class="btn btn-primary" id="setting-button" onclick="showSetting()">
+                <button class="btn" id="setting-button" onclick="showSetting()">
                     <i class="bi bi-gear"></i>
                 </button>
             </div>
 
             <!-- place marker button -->
-            <div class="place-marker">
-                <button class="btn" id="place-marker-button" onclick="placeMarker()">
+            <div class="place-marker-container">
+                <button class="btn" id="place-marker-button">
                     <i class="bi bi-cursor"></i>
+                </button>
+            </div>
+
+            <div class="random-button-container">
+                <button class="btn" id="random-button">
+                    <i class="bi bi-dice-6"></i>
                 </button>
             </div>
 
@@ -136,14 +147,17 @@
                                 the default location (0, 0) and clear the coordinates fields.</li>
 
                             <li><strong>Update Latitude and Longitude:</strong> Enter latitude and longitude values in 
-                                their respective fields and click the "Update" button to place the marker at the specified coordinates. Note that the latitude should be between 
-                                <code>-90</code> and <code>90</code>, and the longitude should be between <code>-180</code> and <code>180</code>.</li>
+                                their respective fields and click the "Update" button to place the marker at the specified coordinates. Note that the latitude 
+                                should be between <code>-90</code> and <code>90</code>, and the longitude should be between <code>-180</code> and <code>180</code>.</li>
 
                             <li><strong>Change Marker Icon:</strong> Select a marker icon from the dropdown menu in the 
                                 "Select Marker" section of the settings window. The selected icon will be applied to the marker on the map.</li>
 
                             <li><strong>Place Marker:</strong> Click the "Place Marker" button, then click on the map to place 
                                 a new marker at the clicked location. The marker's coordinates will be displayed in a popup.</li>
+
+                                <li><strong>Random Location:</strong> Click the "Random" button to move the marker to a randomly generated location 
+                                    on the map. The marker's position and popup content will be updated to reflect the new random coordinates.</li>
 
                             <li><strong>View Street View:</strong> Click on a marker to open Google Street View for the marker's location in a new tab.</li>
                         </ul>
@@ -171,9 +185,9 @@
                 <div class="setting-scroll">
                     <div class="row marker-setting">
                         <!-- Select List Column -->
-                        <div class="col-md-6 select-list">
+                        <div class="col-md-6 select-list order-2 order-md-1">
                             <label for="markerSelect" class="form-label text-center">Select Marker:</label>
-                            <div class="">
+                            <div>
                                 <select id="markerSelect" class="form-select" onchange="changeMarker()">
                                     <option value="0">Blue Pin (default)</option>
                                     <option value="1">Green Leaf</option>
@@ -188,7 +202,7 @@
                         
     
                         <!-- Image Preview Column -->
-                        <div class="col-md-6 text-center align-items-center marker-image">
+                        <div class="col-md-6 text-center align-items-center marker-image order-1 order-md-2">
                             <label class="form-label"
                                 for="selectedMarkerImage">Selected Marker
                                 Image:</label>

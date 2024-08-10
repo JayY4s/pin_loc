@@ -275,7 +275,7 @@ $(document).ready(function () {
     var message = $('#message');
 
     $('#place-marker-button').on('click', function() {
-        // Remove the current marker if it exists
+
         if (marker) {
             map.removeLayer(marker);
         }
@@ -283,30 +283,50 @@ $(document).ready(function () {
         map.getContainer().style.cursor = 'crosshair';
 
         message.text('Click on the map to place a marker')
-        // Listen for the map click event
+
         map.once('click', function(e) {
-            // Get the coordinates
+
             const lat = e.latlng.lat;
             const lng = e.latlng.lng;
     
-            // Place the new marker at the clicked location
             const icon = getCustomIcon($('#markerSelect').val());
             marker = L.marker(e.latlng, { icon: icon }).addTo(map);
     
-            // Add a popup to the marker
             marker.bindPopup(`<b>Coordinates:</b> ${lat.toFixed(6)}, ${lng.toFixed(6)}`)
                 .openPopup();
     
-            // Attach the Street View click event
             marker.on('click', function() {
                 openStreetView(lat, lng);
             });
     
-            // Reset cursor to default after placing the marker
             map.getContainer().style.cursor = '';
     
-            // Clear the message after placing the marker
             message.text('')
         });
     });
+
+    // random location button
+    $('#random-button').on('click', function () {
+
+        var lat = parseFloat((Math.random() * 180 - 90).toFixed(6));
+        var lng = parseFloat((Math.random() * 360 - 180).toFixed(6));
+    
+        updateMarker(lat, lng, 2);
+    
+        if (marker) {
+            // Update marker position
+            marker.setLatLng([lat, lng]);
+            marker.getPopup().setContent(`<b>Random Location:</b> ${lat.toFixed(6)}, ${lng.toFixed(6)}`).update();
+        } else {
+            var icon = getCustomIcon($('#markerSelect').val());
+            marker = L.marker([lat, lng], { icon: icon }).addTo(map);
+            marker.bindPopup(`<b>Random Location:</b> ${lat.toFixed(6)}, ${lng.toFixed(6)}`).openPopup();
+        }
+
+        marker.on('click', function() {
+            openStreetView(lat, lng);
+        });
+    });
+    
+
 });

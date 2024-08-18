@@ -132,7 +132,7 @@ input:focus {
 .setting-scroll, .help-scroll{
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 75%;
+    max-height: 79%;
 }
 
 #setting-title, #help-title{
@@ -251,7 +251,7 @@ input:focus {
 /* media */
 @media screen and (max-width: 768px){
     .menu{
-        max-height: 250px;
+        max-height: 255px;
         overflow-y: auto;
     }
 
@@ -261,7 +261,7 @@ input:focus {
     }
 
     .help-scroll{
-        max-height: 73%;
+        max-height: 76%;
     }
 
     .setting-window{
